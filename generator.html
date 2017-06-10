@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="./css/reset.css">
+<link rel="stylesheet" href="./css/nin-slider.css">
+<link rel="stylesheet" href="./css/html-gen.css">
+<title>title</title>
+<style type="text/css">
+@keyframes selector-anime {
+	0% {opacity: 0}
+	49% {opacity: 0}
+	50% {opacity: 1}
+	100% {opacity: 1}
+}
+iframe, #tree, #edit {
+	height: calc(100vh - 2.2rem);
+}
+iframe {
+	border: inset;
+	width: calc(100vw - 700px);
+	display: block;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+#tree, #edit {
+	position: absolute;
+	width: 350px;
+	border: solid;
+	box-sizing: border-box;
+}
+#tree {
+	left: 0;
+	background-color: rgba(255,0,0,.3);
+	user-select: none;
+}
+#edit {
+	right: 0;
+	background-color: rgba(0,0,255,.3);
+}
+#edit_head {
+	height: 10%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+#btn-create-text {
+	background-color: #333;
+	color: #fff;
+	border: solid 4px;
+	border-radius: 12px;
+	cursor: pointer;
+	width: 50%;
+	font-weight: bold;
+	padding: 1rem;
+	text-align: center;
+	text-decoration: none;
+	transition-duration: 0.4s;
+
+}
+#btn-create-text:hover {
+	border-color: #222;
+	background-color: #46a;
+	box-shadow: 0 4px 20px #777;
+}
+#btn-save {
+	border: solid 2px;
+	padding: 1rem;
+	cursor: pointer;
+	font-weight: bold;
+	color: #fff;
+	background-color: #607D8B;
+}
+#btn-save:hover {
+	background-color: #fff;
+	color: #000;
+	box-shadow: 0 4px 20px #777;
+}
+
+#input-area {
+	height: 90%;
+	overflow-y: scroll;
+}
+
+#input-area::-webkit-scrollbar, #tree_wrap::-webkit-scrollbar {
+	width:7px;
+	background:#eee;
+	border-radius:3px;
+}
+#input-area::-webkit-scrollbar-thumb, #tree_wrap::-webkit-scrollbar-thumb {
+	overflow:hidden;
+	border-radius:3px; 
+	background:#000;
+}
+
+.text-edit-wrap {
+	width: 90%;
+	height: inherit;
+	margin: 10px auto;
+}
+.text-edit {
+	resize: none;
+	width: 100%;
+	height: 60vh;
+}
+.inp-type-wrap {
+	text-align: center;
+	border-top: solid;
+	margin: 1rem;
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+.inp-type-wrap * {
+	font-size: 1rem;
+	line-height: 1.5rem;
+	margin-left: -0.5rem;
+}
+.inp-atr-wrap {
+	display: flex;
+	align-items: center;
+}
+.inp-atr-wrap label {
+	flex: 3 0;
+	border-bottom: dashed;
+}
+.inp-atr-wrap .child-atr-label {
+	margin-left: 5px;
+	border-left: dotted;
+	border-bottom: dotted;
+}
+.inp-atr-wrap input {
+	flex: 1;
+	width: 170px;
+	margin-left: .5rem;
+}
+#tree_head {
+	height: 10%;
+}
+#tree_wrap {
+	height: 90%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.tree_el_area {
+	position: relative;
+	background-color: rgba(255,255,255,.3);
+	border-radius: 1rem 0 0 1rem;
+	padding: .5rem 0;
+	padding-left: .3rem; 
+	margin: .0rem .0rem .2rem .2rem;
+	cursor: pointer;
+}
+.tree_el_del {
+	z-index: 100;
+	position: absolute;
+	right: 0;
+	margin: .5rem 5px 0 0;
+	border: solid;
+	width: 1rem;
+	height: 1rem;
+	text-align: center;
+	cursor: pointer;
+}
+.tree_el_del:hover {
+	background-color: #000;
+	color: #f00;
+}
+.tree_el_del::before {
+	content: "×";
+}
+.tree_before_area {
+	height: .7rem;
+	color: #3af;
+}
+#head {
+	height: 2rem;
+	background-color: #8cf;
+	display: flex;
+}
+#head-info-area {
+	flex: 1;
+	line-height: 2rem;
+}
+#btn-fin-edit {
+	background-color: #333;
+	color: #fff;
+	padding: .5rem;
+	border: solid;
+	border-bottom: none;
+	cursor: pointer;
+}
+#btn-fin-edit:hover {
+	background-color: #469;
+}
+.head_info_anime {
+	animation-name: head-info;
+	animation-duration: 1s;
+	animation-timing-function: ease-out;
+	animation-iteration-count: 1;
+}
+.head_info_anime-err {
+	animation-name: head-info-err;
+	animation-duration: 1s;
+	animation-timing-function: ease-out;
+	animation-iteration-count: 1;
+}
+@keyframes head-info {
+	50% {background-color: #ef9 }
+}
+@keyframes head-info-err {
+	50% { background-color: #f00; }
+}
+#btn-open-create {
+	display: block;
+	margin: 2px auto;
+	color: #222;
+	background-color: #fff;
+	border: solid 4px;
+	border-radius: 12px;
+	cursor: pointer;
+	width: 50%;
+	font-weight: bold;
+	padding: 1rem;
+	text-align: center;
+	text-decoration: none;
+	transition-duration: 0.4s;
+}
+#btn-open-create:hover {
+	background-color: #f77;
+	color: #fff;
+	box-shadow: 0 4px 20px #777;
+}
+
+#modal-create, #modal-delete {
+	padding: 2rem;
+	background-color: #fff;
+	border-radius: 1rem;
+}
+.close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+	margin: 10px;
+	border: solid;
+	width: 1.5rem;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	text-align: center;
+	color: #00f;
+	border-radius: 2rem;
+}
+.close-button:hover {
+	color: #f00;
+	background-color: #333;
+}
+.modal-title {
+	font-size: 1.5rem;
+	padding: 0 1rem 1rem 1rem;
+	text-align: center;
+	border-bottom: dashed;
+}
+.modal-input-wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 1rem;
+}
+.modal-input-wrap * {
+	margin: 0 1rem;
+	padding: .5rem;
+	font-size: 1.2rem;
+}
+.modal-input-wrap input {
+
+}
+#btn-create {
+	background-color: #555;
+	color: #fff;
+	border: solid;
+	width: 70%;
+	margin: 2rem auto 1rem;
+	text-align: center;
+	padding: 1rem;
+	transition-duration: 0.4s;
+	font-weight: bold;
+	cursor: pointer;
+}
+#btn-create:hover {
+	background-color: #008cba;
+}
+
+#modal-save {
+	background-color: #fff;
+	border-radius: 2rem;
+	padding: 3rem;
+	font-style: 1.6rem;
+}
+#modal-delete-btn, #modal-cancel-btn {
+	color: #555;
+	border: solid;
+	width: 70%;
+	margin: .5rem auto;
+	text-align: center;
+	padding: .5rem;
+	transition-duration: 0.4s;
+	font-weight: bold;
+	cursor: pointer;
+}
+#modal-delete-msg {
+	color: #f00;
+	margin: 1rem;
+}
+#modal-delete-btn {
+	color: #fff;
+	background-color: #555;
+}
+#modal-delete-btn:hover {
+	color: #fff;
+	background-color: #f00;
+}
+#modal-cancel-btn:hover {
+	color: #008cba;
+}
+.text-edit-wrap {
+	text-align: center;
+	font-size: 1.8rem;
+	text-align: center;
+	line-height: 2rem;
+}
+.text-edit-wrap::before {
+	content: "text";
+	display: block;
+	padding: .2rem;
+	margin: .5rem;
+	border-top: solid;
+	border-bottom: solid;
+}
+.text-edit {
+	padding: 1rem;
+	border-radius: 1rem;
+	border: solid transparent;
+	box-sizing: border-box;
+	font-size: 1.2rem;
+	background-color: rgba(255,255,255,.8);
+}
+.text-edit:focus {
+	outline: none;
+	border: solid #00f;
+	background-color: #fff;
+}
+#modal-fin-edit {
+	padding: 3rem;
+	background-color: #fff;
+	border-radius: 2rem;
+}
+.modal-btn {
+	border: solid;
+	padding: 1rem 2rem;
+	font-size: 1.3rem;
+	margin: 1rem;
+	cursor: pointer;
+}
+.modal-btn:hover {
+	background-color: #68c;
+	color: #fff;
+}
+#modal-err {
+	padding: 3rem;
+	background-color: #fff;
+}
+#modal-err-msg {
+	padding: 2rem;
+}
+.err-title {
+	color: #f00;
+	font-size: 1.5rem;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<div id="head">
+	<div id="head-info-area"></div>
+	<div id="btn-fin-edit" onclick="nin.modal.show('modal-fin-edit')">編集を終了する</div>
+</div>
+<div id="tree">
+	<div id="tree_head">
+		<p id="btn-open-create">新しい要素を作る</p>
+	</div>
+	<div id="tree_wrap"></div>
+</div>
+<div id="edit">
+	<div id="edit_head">
+		<div id="btn-create-text">textを追加する</div>
+		<div id="btn-save">save</div>
+	</div>
+	<div id="input-area"></div>
+</div>
+		
+	
+
+<div class="nin_modal" id="modal-create">
+	<div onclick="nin.modal.close()" class="close-button">×</div>
+	<p class="modal-title">新しい要素を作る</p>
+	<div class="modal-input-wrap">
+		<label for="createElementName">名前</label>
+		<input type="text" id="createElementName" maxlength="20">
+	</div>
+	<div class="modal-input-wrap">
+		<label for="createElementType">タグ*</label>
+		<input type="text" id="createElementType" value="div">
+	</div>
+	<p id="modal-errmsg" style="text-align: center; color: #f00"></p>
+	<div id="btn-create">作成</div>
+</div/>
+
+<div class="nin_modal" id="modal-save">
+	<div onclick="nin.modal.close()" class="close-button">×</div>
+	<p>保存しました</p>
+</div>
+
+<div class="nin_modal" id="modal-delete">
+	<div onclick="nin.modal.close()" class="close-button">×</div>
+	<p class="modal-title">要素を削除する</p>
+	<p id="modal-delete-msg"></p>
+	<div id="modal-delete-btn">削除</div>
+	<div id="modal-cancel-btn" onclick="nin.modal.close()">キャンセル</div>
+</div>
+
+<div class="nin_modal" id="modal-fin-edit">
+	<div onclick="nin.modal.close()" class="close-button">×</div>
+	<div class="modal-btn" id="btn-fin-edit-save">保存して終了する</div>
+	<div class="modal-btn" id="btn-fin-edit-nosave">保存せずに終了する</div>
+	<div class="modal-btn" onclick="nin.modal.close()">キャンセル</div>
+</div>
+
+<div class="nin_modal" id="modal-err">
+	<div onclick="nin.modal.close()" class="close-button">×</div>
+	<p class="err-title">ERROR</p>
+	<p id="modal-err-msg"></p>
+</div>
+
+<script type="text/javascript" src="./js/nin-slider.js"></script>
+<script type="text/javascript" src="./js/html-gen2.js"></script>
+</body>
+</html>

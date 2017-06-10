@@ -1,0 +1,23 @@
+@charset "UTF-8";
+html {
+	user-select: none;
+}
+.selector-element {
+	pointer-events : none;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	position: absolute;
+	background-color: rgba(100,255,255,.3);
+	border: dashed 3px #FF0;
+	animation-name: selector-anime;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+@keyframes selector-anime {
+	0% {opacity: 0}
+	49% {opacity: 0}
+	50% {opacity: 1}
+	100% {opacity: 1}
+}
+
