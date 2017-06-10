@@ -1,0 +1,7 @@
+/.idea/
+/tmp/
+/bin/
+*.test
+*.swp
+*.js
+*.map

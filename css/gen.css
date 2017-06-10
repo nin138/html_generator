@@ -1,0 +1,122 @@
+@charset "UTF-8";
+body {
+  background-color: #222;
+  color: #ddd;
+  cursor: default;
+  user-select: none;
+}
+header {
+  width: 100%;
+  height: 3.4rem;
+}
+#top-menu-area {
+  width: 100%;
+  height: 1.7rem;
+  line-height: 1.7rem;
+  border-bottom: ridge #777 2px;
+  box-sizing: border-box;
+}
+#top-menu-area div {
+  display: inline-block;
+}
+#top-tab-area {
+  height: 1.7rem;
+  line-height: 1.7rem;
+  box-sizing: border-box;
+  border-bottom: ridge #777 2px;
+}
+#top-tab-area div {
+  display: inline-block;
+}
+
+#main {
+  width: 100%;
+  height: calc(100vh - 3.4rem);
+  display: flex;
+}
+#edit-area, #tree-area, #project-folder-area, #iframe-area {
+  box-sizing: border-box;
+  border: inset;
+}
+#edit-area, #tree-area, #project-folder-area {
+  flex: 0 0 300px;
+  height: 100%;
+}
+#iframe-area {
+  height: 100%;
+  flex: 1;
+}
+#project-folder-area {
+  box-sizing: border-box;
+}
+#project-folder .head {
+
+}
+
+/*project-manager*/
+#project-folder-area .folder, #project-folder-area .file {
+  padding: 5px 0 5px 1rem;
+}
+#project-folder-area .folder {
+  overflow: hidden;
+  position: relative;
+  height: 1.2rem;
+}
+#project-folder-area .file {
+  cursor: pointer;
+}
+#project-folder-area .folder-arrow ,#project-folder-area .folder-name {
+  cursor: pointer;
+  display: block;
+}
+.folder-name {
+  padding: 1px;
+}
+#project-folder-area .folder-arrow {
+  width: 0.7rem;
+  height: 0.7rem;
+  position: absolute;
+  font-size: 0.7rem;
+  line-height: 0.7rem;
+  left: 0;
+  top: 10px;
+  transform: rotate(-90deg);
+}
+#project-folder-area .folder-name::before, #project-folder-area .file::before {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+}
+#project-folder-area .folder-name::before {
+  background: url("../img/folder.png") no-repeat bottom;
+  background-size: 80%;
+}
+#project-folder-area .file::before {
+  background: url("../img/file.png") no-repeat bottom;
+  background-size: 80%;
+}
+
+.right-click-view-wrap {
+  display: none;
+  position: absolute;
+  width : 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  /*filter: blur(5px);*/
+}
+.right-click-view {
+  display: none;
+  position: absolute;
+  padding: 5px;
+  border: solid;
+}
+.right-click-view-item {
+  cursor: pointer;
+}
+.right-click-view-item:hover {
+  background: rgba(0,0,255,.5);
+}
+/*end project-manager*/
